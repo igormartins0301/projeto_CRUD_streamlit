@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from security import get_current_user
 from db import Database
 from schemas.schemas import ProductRead, ProductUpdate, ProductCreate
+from models.users_models import UsersModel
 from typing import List
 from cruds.crud import (
     create_product,
@@ -50,3 +52,7 @@ def update_product_route(
     if db_product is None:
         raise HTTPException(status_code=404, detail="Product not found")
     return db_product
+
+@router.get("/protected")
+def protected_route(user: UsersModel = Depends(get_current_user)):
+    return {"message": f"Hello, {user.name}!"}
