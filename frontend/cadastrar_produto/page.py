@@ -3,10 +3,14 @@ import requests
 
 def cadastrar_produto(produto_data):
     url = 'http://127.0.0.1:8000/products/'
-    response = requests.post(url, json=produto_data)
+    headers = {
+    "Authorization": f"Bearer {st.session_state.token}"
+    }
+
+    response = requests.post(url, headers=headers, json=produto_data)
     
     if response.status_code == 200:
-        return 'Produto cadastrado'
+        return 'Produto Cadastrado'
     else:
         return None
     

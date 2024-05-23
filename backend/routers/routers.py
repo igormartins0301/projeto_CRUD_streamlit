@@ -18,7 +18,7 @@ router = APIRouter()
 
 
 @router.post("/products/", response_model=ProductRead)
-def create_product_route(product: ProductCreate, db: Session = Depends(db.get_db)):
+def create_product_route(product: ProductCreate, db: Session = Depends(db.get_db), user: UsersModel = Depends(get_current_user)):
     return create_product(db=db, product=product)
 
 
@@ -37,7 +37,7 @@ def read_product_route(product_id: int, db: Session = Depends(db.get_db)):
 
 
 @router.delete("/products/{product_id}", response_model=ProductRead)
-def detele_product_route(product_id: int, db: Session = Depends(db.get_db)):
+def detele_product_route(product_id: int, db: Session = Depends(db.get_db), user: UsersModel = Depends(get_current_user)):
     db_product = delete_product(db, product_id=product_id)
     if db_product is None:
         raise HTTPException(status_code=404, detail="Product not found")
@@ -46,7 +46,7 @@ def detele_product_route(product_id: int, db: Session = Depends(db.get_db)):
 
 @router.put("/products/{product_id}", response_model=ProductRead)
 def update_product_route(
-    product_id: int, product: ProductUpdate, db: Session = Depends(db.get_db)
+    product_id: int, product: ProductUpdate, db: Session = Depends(db.get_db), user: UsersModel = Depends(get_current_user)
 ):
     db_product = update_product(db, product_id=product_id, product=product)
     if db_product is None:

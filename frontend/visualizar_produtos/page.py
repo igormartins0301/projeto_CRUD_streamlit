@@ -24,3 +24,4 @@ def pagina_visualizar_produtos():
         st.write(df)
     else:
         st.error('Erro ao obter a lista de produtos. Tente novamente.')
+
