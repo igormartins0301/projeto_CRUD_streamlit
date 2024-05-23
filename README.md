@@ -1,10 +1,10 @@
 # Projeto CRUD Fullstack
 
-![image](/pic/foto.png)
+![image](/pic/foto.jpg)
 
 ## Pré-requisitos
 1. Banco de Dados Postgres no render, passo a passo no link (https://www.linkedin.com/feed/update/urn:li:activity:7136743523554373632/) 
-2. MongoDBCompass
+
 
 ## Passos para executar o projeto
 
